@@ -1,6 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { getApkAsset, getLatestBuild, getProjects, formatReleaseDate, API_BASE, type LatestBuild, type Project } from '$lib/api';
+  import { onMount } from 'svelte';
+  import { getApkAsset, getLatestBuild, getProjects, formatReleaseDate, API_BASE, logout, restoreAuth, startLogin, type AuthSession, type LatestBuild, type Project } from '$lib/api';
 
   let isLisnnto = false;
   let projects: Project[] = [];
@@ -9,6 +10,8 @@
   let error = '';
   let projectError = '';
   let apiStatus: 'checking' | 'online' | 'degraded' | 'offline' = 'checking';
+  let authSession: AuthSession | null = null;
+  let authLoading = true;
 
   const detectExperience = () => {
     if (!browser) return;
@@ -45,7 +48,16 @@
     loading = false;
   };
 
-  load();
+  onMount(async () => {
+    authSession = await restoreAuth();
+    authLoading = false;
+    await load();
+  });
+
+  const handleLogout = async () => {
+    await logout(authSession);
+    authSession = null;
+  };
 
   $: apk = build ? getApkAsset(build) : undefined;
 </script>
@@ -61,6 +73,14 @@
     <div class="header-meta">
       <span class:status-online={apiStatus === 'online'} class:status-degraded={apiStatus === 'degraded'} class:status-offline={apiStatus === 'offline'} class="status-dot" aria-hidden="true"></span>
       <span>API {apiStatus} / {API_BASE.replace(/^https?:\/\//, '')}</span>
+      {#if !authLoading}
+        {#if authSession}
+          <span class="auth-user">{authSession.user?.name || authSession.user?.email || 'Account'}</span>
+          <button class="auth-button auth-button-muted" onclick={handleLogout}>Log out</button>
+        {:else}
+          <button class="auth-button" onclick={startLogin}>Log in with Google</button>
+        {/if}
+      {/if}
     </div>
   </header>
 

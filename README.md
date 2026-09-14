@@ -19,6 +19,12 @@ uses the built-in Lisnnto entry as the documented fallback; other API failures
 remain visible as an error state. Asset download URLs are resolved against the
 API origin, including when the API returns a relative path.
 
+The header also supports Google login through the same OAuth flow as the
+Obsidian plugin (`/auth/v0/login`). The returned access and refresh tokens are
+kept in browser `localStorage`; the refresh token is exchanged automatically
+when the access token expires. Configure the auth service CORS allowlist with
+the deployed website origin.
+
 ## Build and deploy
 
 ```bash

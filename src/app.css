@@ -10,6 +10,10 @@ button{font:inherit}
 .wordmark-dot{color:var(--lime)}
 .header-meta,.eyebrow,.release-label,.project-meta,.section-heading span,.footer{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
 .header-meta{font-size:10px;letter-spacing:.08em;color:#a9a59d;display:flex;align-items:center;gap:8px;text-transform:uppercase}
+.auth-user{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;text-transform:none;letter-spacing:0}
+.auth-button{border:1px solid var(--lime);background:var(--lime);color:var(--ink);padding:6px 10px;font-size:10px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0}
+.auth-button-muted{border-color:#6d6a63;background:transparent;color:#fff}
+.auth-button:hover{filter:brightness(.92)}
 .status-dot{width:6px;height:6px;border-radius:50%;box-shadow:0 0 0 4px rgba(169,165,157,.12)}
 .status-online{background:var(--lime);box-shadow:0 0 0 4px rgba(215,243,74,.12)}
 .status-degraded{background:#e8b84a;box-shadow:0 0 0 4px rgba(232,184,74,.12)}
@@ -60,4 +64,4 @@ h1 em{font-style:normal;color:#8d8a82}
 .aside-note p{max-width:260px;margin:0}
 .footer{width:min(1100px,calc(100% - 44px));margin:auto;padding:22px 0 25px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:10px;letter-spacing:.04em}
 .footer a{text-decoration:none;color:var(--ink)}
-@media(max-width:650px){.masthead{height:70px;padding:0 22px}.header-meta{font-size:8px}.main-content{width:calc(100% - 44px)}.hero{padding:76px 0 62px}h1{font-size:clamp(51px,16vw,78px)}.lede{font-size:15px;margin-top:28px}.project-row{grid-template-columns:34px 1fr 24px;gap:10px;padding:20px 0}.project-meta{display:none}.project-copy strong{font-size:21px}.project-copy span{font-size:13px}.project-arrow{font-size:20px}.release-details{align-items:stretch;flex-direction:column}.download-button{justify-content:space-between}.version{font-size:32px}.footer{width:calc(100% - 44px);flex-direction:column;gap:8px}.aside-note{padding-bottom:80px}}
+@media(max-width:650px){.masthead{height:70px;padding:0 22px}.header-meta{font-size:8px;gap:5px}.auth-user{display:none}.auth-button{font-size:9px;padding:5px 7px}.main-content{width:calc(100% - 44px)}.hero{padding:76px 0 62px}h1{font-size:clamp(51px,16vw,78px)}.lede{font-size:15px;margin-top:28px}.project-row{grid-template-columns:34px 1fr 24px;gap:10px;padding:20px 0}.project-meta{display:none}.project-copy strong{font-size:21px}.project-copy span{font-size:13px}.project-arrow{font-size:20px}.release-details{align-items:stretch;flex-direction:column}.download-button{justify-content:space-between}.version{font-size:32px}.footer{width:calc(100% - 44px);flex-direction:column;gap:8px}.aside-note{padding-bottom:80px}}
