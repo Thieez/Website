@@ -1,0 +1,63 @@
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111;background:#f4f1ea;font-synthesis:none;--ink:#111;--paper:#f4f1ea;--muted:#6d6a63;--line:#d7d1c6;--lime:#d7f34a}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;min-width:320px;background:var(--paper)}
+a{color:inherit}
+button{font:inherit}
+.site-shell{min-height:100vh;display:flex;flex-direction:column}
+.masthead{height:82px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,5vw,72px)}
+.wordmark{font-size:26px;font-weight:800;letter-spacing:-.07em;text-decoration:none}
+.wordmark-dot{color:var(--lime)}
+.header-meta,.eyebrow,.release-label,.project-meta,.section-heading span,.footer{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+.header-meta{font-size:10px;letter-spacing:.08em;color:#a9a59d;display:flex;align-items:center;gap:8px;text-transform:uppercase}
+.status-dot{width:6px;height:6px;border-radius:50%;box-shadow:0 0 0 4px rgba(169,165,157,.12)}
+.status-online{background:var(--lime);box-shadow:0 0 0 4px rgba(215,243,74,.12)}
+.status-degraded{background:#e8b84a;box-shadow:0 0 0 4px rgba(232,184,74,.12)}
+.status-offline{background:#e56b5d;box-shadow:0 0 0 4px rgba(229,107,93,.12)}
+.main-content{width:min(1100px,calc(100% - 44px));margin:0 auto;flex:1}
+.hero{padding:clamp(72px,12vw,150px) 0 76px}
+.index-hero{max-width:800px}
+.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--muted);margin:0 0 30px}
+h1{font-size:clamp(54px,9vw,116px);line-height:.88;letter-spacing:-.085em;margin:0;font-weight:800}
+h1 em{font-style:normal;color:#8d8a82}
+.lede{font-size:17px;line-height:1.5;max-width:450px;color:#4e4b45;margin:37px 0 0}
+.project-section{padding-bottom:110px}
+.section-heading{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:14px;margin-bottom:0}
+.section-heading h2{font-size:15px;letter-spacing:-.02em;margin:0}
+.section-heading span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.project-row{display:grid;grid-template-columns:70px 1fr 210px 30px;gap:18px;align-items:center;padding:25px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .2s ease,background .2s ease}
+.project-row:hover{padding-left:13px;padding-right:13px;background:var(--lime)}
+.project-row:focus-visible,.download-button:focus-visible,.text-button:focus-visible,.wordmark:focus-visible{outline:3px solid #607000;outline-offset:4px}
+.project-number,.project-meta,.version,.asset-name{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+.project-number{font-size:12px;color:var(--muted)}
+.project-copy{display:flex;flex-direction:column;gap:6px}
+.project-copy strong{font-size:24px;letter-spacing:-.04em}
+.project-copy span{font-size:14px;color:var(--muted)}
+.project-meta{display:flex;flex-direction:column;gap:6px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.project-meta span:first-child{color:var(--ink)}
+.project-arrow{font-size:24px;text-align:right}
+.state-panel{border:1px solid var(--line);padding:24px;display:flex;gap:12px;align-items:center;color:var(--muted);font-size:14px;min-height:76px}
+.state-panel strong{color:var(--ink)}
+.state-panel span:last-child{line-height:1.45}
+.error-panel{align-items:flex-start;flex-direction:column}
+.text-button{padding:0;border:0;background:transparent;color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.loader{width:10px;height:10px;border:2px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:spin .8s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.download-hero{padding-bottom:45px;max-width:900px}
+.download-hero .lede{max-width:510px}
+.release-card{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:58px;padding:16px 0 24px}
+.release-topline{display:flex;align-items:center;gap:12px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:10px;letter-spacing:.06em}
+.release-label{color:var(--ink)}
+.release-rule{height:1px;background:var(--line);flex:1}
+.release-date{color:var(--muted)}
+.release-details{display:flex;justify-content:space-between;align-items:end;gap:24px;padding-top:34px}
+.version{font-size:38px;letter-spacing:-.06em;margin:0}
+.asset-name{font-size:11px;color:var(--muted);margin:8px 0 0}
+.download-button{background:var(--lime);border:1px solid var(--ink);padding:17px 20px;font-weight:700;text-decoration:none;display:inline-flex;gap:24px;align-items:center;transition:transform .2s ease,box-shadow .2s ease}
+.download-button:hover{transform:translate(-3px,-3px);box-shadow:4px 4px 0 var(--ink)}
+.aside-note{border-top:1px solid var(--line);padding:22px 0 100px;display:flex;gap:35px;color:var(--muted);font-size:13px;line-height:1.5}
+.aside-index{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--ink);font-size:11px}
+.aside-note p{max-width:260px;margin:0}
+.footer{width:min(1100px,calc(100% - 44px));margin:auto;padding:22px 0 25px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:10px;letter-spacing:.04em}
+.footer a{text-decoration:none;color:var(--ink)}
+@media(max-width:650px){.masthead{height:70px;padding:0 22px}.header-meta{font-size:8px}.main-content{width:calc(100% - 44px)}.hero{padding:76px 0 62px}h1{font-size:clamp(51px,16vw,78px)}.lede{font-size:15px;margin-top:28px}.project-row{grid-template-columns:34px 1fr 24px;gap:10px;padding:20px 0}.project-meta{display:none}.project-copy strong{font-size:21px}.project-copy span{font-size:13px}.project-arrow{font-size:20px}.release-details{align-items:stretch;flex-direction:column}.download-button{justify-content:space-between}.version{font-size:32px}.footer{width:calc(100% - 44px);flex-direction:column;gap:8px}.aside-note{padding-bottom:80px}}
