@@ -57,7 +57,7 @@
 
 <div class="site-shell">
   <header class="masthead">
-    <a class="wordmark" href="/">Thieez<span class="wordmark-dot">.</span></a>
+    <a class="wordmark" href="https://thieez.com/">Thieez<span class="wordmark-dot">.</span></a>
     <div class="header-meta">
       <span class:status-online={apiStatus === 'online'} class:status-degraded={apiStatus === 'degraded'} class:status-offline={apiStatus === 'offline'} class="status-dot" aria-hidden="true"></span>
       <span>API {apiStatus} / {API_BASE.replace(/^https?:\/\//, '')}</span>
