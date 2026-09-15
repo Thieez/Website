@@ -14,10 +14,12 @@ Set `VITE_API_BASE` to point at a local API during development; production defau
 `window.location.hostname`. For local testing, use `/?project=lisnnto`.
 
 The project index requests `GET /projects/v0`, accepting either a project array
-or `{ "projects": [...] }`. Until that endpoint exists, a 404/405 intentionally
-uses the built-in Lisnnto entry as the documented fallback; other API failures
-remain visible as an error state. Asset download URLs are resolved against the
-API origin, including when the API returns a relative path.
+or `{ "projects": [...] }`. Note and Lisnnto are always included as known
+projects, so a project API response cannot hide a configured product domain.
+Until that endpoint exists, a 404/405 uses both built-in project entries as the
+fallback; other API failures remain visible as an error state. Asset download
+URLs are resolved against the API origin, including when the API returns a
+relative path.
 
 The header also supports Google login through the same OAuth flow as the
 Obsidian plugin (`/auth/v0/login`). The returned access and refresh tokens are
