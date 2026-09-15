@@ -251,8 +251,14 @@ export async function getLatestBuild(): Promise<LatestBuild> {
 }
 
 export async function getLatestPluginBuild(): Promise<PluginBuild> {
-  const latest = await fetchJson<PluginBuild>('/updates/v0/repository/Thieez/note/latest');
-  return { ...latest, assets: latest.assets ?? [] };
+  try {
+    const latest = await fetchJson<PluginBuild>('/updates/v0/repository/Thieez/note/latest');
+    return { ...latest, assets: latest.assets ?? [] };
+  } catch (cause) {
+    const status = cause instanceof Error ? (cause as Error & { status?: number }).status : undefined;
+    if (status === 404) return { assets: [] };
+    throw cause;
+  }
 }
 
 export function getPluginZipAsset(build: PluginBuild): ApiAsset | undefined {
