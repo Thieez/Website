@@ -47,6 +47,8 @@ export type LatestBuild = {
   assets: ApiAsset[];
 };
 
+export type PluginBuild = LatestBuild;
+
 function isBrowser(): boolean {
   return typeof window !== 'undefined';
 }
@@ -230,6 +232,21 @@ export async function getLatestBuild(): Promise<LatestBuild> {
     const latest = releases[0] ?? {};
     return { ...latest, assets: latest.assets ?? [] };
   }
+}
+
+export async function getLatestPluginBuild(): Promise<PluginBuild> {
+  const latest = await fetchJson<PluginBuild>('/updates/v0/repository/Thieez/note/latest');
+  return { ...latest, assets: latest.assets ?? [] };
+}
+
+export function getPluginZipAsset(build: PluginBuild): ApiAsset | undefined {
+  const asset = build.assets.find((candidate) => candidate.name.toLowerCase().endsWith('.zip'));
+  if (!asset) return undefined;
+  return {
+    ...asset,
+    browser_download_url: resolveAssetUrl(asset.browser_download_url),
+    download_url: resolveAssetUrl(asset.download_url)
+  };
 }
 
 export function getApkAsset(build: LatestBuild): ApiAsset | undefined {

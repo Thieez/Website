@@ -1,9 +1,10 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
-  import { getApkAsset, getLatestBuild, getProjects, formatReleaseDate, API_BASE, logout, restoreAuth, startLogin, type AuthSession, type LatestBuild, type Project } from '$lib/api';
+  import { getApkAsset, getLatestBuild, getLatestPluginBuild, getPluginZipAsset, getProjects, formatReleaseDate, API_BASE, logout, restoreAuth, startLogin, type AuthSession, type LatestBuild, type Project } from '$lib/api';
 
   let isLisnnto = false;
+  let isNote = false;
   let projects: Project[] = [];
   let build: LatestBuild | null = null;
   let loading = true;
@@ -17,6 +18,7 @@
     if (!browser) return;
     const params = new URLSearchParams(window.location.search);
     isLisnnto = window.location.hostname === 'lisnnto.thieez.com' || params.get('project') === 'lisnnto';
+    isNote = window.location.hostname === 'note.thieez.com' || params.get('project') === 'note';
   };
 
   const load = async () => {
@@ -26,9 +28,9 @@
     projectError = '';
     apiStatus = 'checking';
 
-    if (isLisnnto) {
+    if (isLisnnto || isNote) {
       try {
-        build = await getLatestBuild();
+        build = isNote ? await getLatestPluginBuild() : await getLatestBuild();
         apiStatus = 'online';
       } catch (cause) {
         apiStatus = 'offline';
@@ -60,10 +62,11 @@
   };
 
   $: apk = build ? getApkAsset(build) : undefined;
+  $: pluginZip = build && isNote ? getPluginZipAsset(build) : undefined;
 </script>
 
 <svelte:head>
-  <title>{isLisnnto ? 'Lisnnto — Thieez' : 'Thieez — Things we’re building'}</title>
+  <title>{isLisnnto ? 'Lisnnto — Thieez' : isNote ? 'Note — Thieez' : 'Thieez — Things we’re building'}</title>
   <meta name="description" content="Independent software projects from Thieez." />
 </svelte:head>
 
@@ -85,11 +88,11 @@
   </header>
 
   <main class="main-content">
-    {#if isLisnnto}
+    {#if isLisnnto || isNote}
       <section class="hero download-hero" aria-labelledby="download-heading">
-        <p class="eyebrow">THIEEZ / LISNNTO</p>
+        <p class="eyebrow">THIEEZ / {isNote ? 'NOTE' : 'LISNNTO'}</p>
         <h1 id="download-heading">The latest build,<br /><em>ready when you are.</em></h1>
-        <p class="lede">A small, fast Android companion for keeping your listening life in order. Download the newest tester build below.</p>
+        <p class="lede">{isNote ? 'Download the newest Obsidian plugin build.' : 'A small, fast Android companion for keeping your listening life in order. Download the newest tester build below.'}</p>
 
         {#if loading}
           <div class="state-panel" aria-live="polite">
@@ -102,7 +105,7 @@
             <span>{error}</span>
             <button class="text-button" onclick={load}>Try again <span aria-hidden="true">↗</span></button>
           </div>
-        {:else if build && apk}
+        {:else if build && (apk || pluginZip)}
           <div class="release-card">
             <div class="release-topline">
               <span class="release-label">LATEST RELEASE</span>
@@ -112,17 +115,17 @@
             <div class="release-details">
               <div>
                 <p class="version">{build.tag_name || 'Latest'}</p>
-                <p class="asset-name">{apk.name}</p>
+                <p class="asset-name">{(apk || pluginZip)?.name}</p>
               </div>
-              <a class="download-button" href={apk.browser_download_url || apk.download_url} download>
-                Download latest APK <span aria-hidden="true">↓</span>
+              <a class="download-button" href={(apk || pluginZip)?.browser_download_url || (apk || pluginZip)?.download_url} download>
+                Download latest {isNote ? 'plugin' : 'APK'} <span aria-hidden="true">↓</span>
               </a>
             </div>
           </div>
         {:else}
           <div class="state-panel">
-            <strong>No Android build is published yet.</strong>
-            <span>Check back soon — the release service is online, but there is no APK to download.</span>
+            <strong>No build is published yet.</strong>
+            <span>Check back soon — the release service is online, but there is no downloadable build.</span>
           </div>
         {/if}
       </section>
