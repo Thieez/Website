@@ -34,5 +34,6 @@ npm run preview
 ```
 
 Point the apex/site host, `lisnnto.thieez.com`, and `note.thieez.com` at the
-deployed SvelteKit application. The API must allow the site origins in its CORS policy, including the
+deployed SvelteKit application. After deploying this change, opening
+`https://note.thieez.com` renders the Obsidian build download screen. The API must allow the site origins in its CORS policy, including the
 production domains and any local development origin.

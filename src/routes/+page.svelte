@@ -17,8 +17,9 @@
   const detectExperience = () => {
     if (!browser) return;
     const params = new URLSearchParams(window.location.search);
-    isLisnnto = window.location.hostname === 'lisnnto.thieez.com' || params.get('project') === 'lisnnto';
-    isNote = window.location.hostname === 'note.thieez.com' || params.get('project') === 'note';
+    const hostname = window.location.hostname.toLowerCase();
+    isLisnnto = hostname === 'lisnnto.thieez.com' || params.get('project') === 'lisnnto';
+    isNote = hostname === 'note.thieez.com' || params.get('project') === 'note';
   };
 
   const load = async () => {
@@ -131,7 +132,7 @@
       </section>
       <section class="aside-note">
         <span class="aside-index">01</span>
-        <p>Lisnnto is in active testing. If something feels off, that is useful information.</p>
+        <p>{isNote ? 'Thieez Note is distributed as an Obsidian plugin build.' : 'Lisnnto is in active testing. If something feels off, that is useful information.'}</p>
       </section>
     {:else}
       <section class="hero index-hero" aria-labelledby="index-heading">
